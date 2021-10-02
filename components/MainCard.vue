@@ -6,8 +6,7 @@
     :to="`/character/${character.id}`">
     {{character.name}}
     </nuxt-link>
-    <h4 class="card__title"><b>{{character.name}}</b></h4>
-    <p>{{character.species}}</p>
+     <p>{{character.species}}</p>
     <p>{{character.status}}</p>
      <p>{{info.name}}</p>
      <p>{{info[0]}}</p>
@@ -40,7 +39,7 @@ export default {
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    width: 300px;
+    width: 100%;
     height: 400px;
 }
 .card__title{
@@ -53,6 +52,6 @@ export default {
 }
 
 .card__container {
-    padding: 2px;
+    padding: 10px;
 }
 </style>
