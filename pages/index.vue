@@ -94,7 +94,6 @@ export default {
 <style>
 .container {
   position: relative;
-  min-height: 90vh;
   display: flex;
   width: 80%;
   margin: 0 auto;
