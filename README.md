@@ -1,9 +1,5 @@
 # rick-app
-https://rick-app-eight.vercel.app/
-
-
-
-> test-project
+https://rick-app-dcdwcnlyt-ekaterina-create.vercel.app/
 
 ## Build Setup
 
