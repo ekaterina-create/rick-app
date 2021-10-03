@@ -8,14 +8,19 @@
     </nuxt-link>
      <p>{{character.species}}</p>
     <p>{{character.status}}</p>
-     <p>{{info.name}}</p>
-     <p>{{info[0]}}</p>
+    <h2 class="card__subtitle">Episodes</h2>
+    <div class="card__wrapper">
+    <nuxt-link
+      to="/"
+      class="card__link"
+      v-for="episode in sliceEpisodes" 
+      :key='episode'>{{ episode }}</nuxt-link>
     </div>
+     </div>
 </div>
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
   props: ['hero'],
@@ -25,12 +30,11 @@ export default {
       character: this.hero
     }
 },
-
-// mounted() {
-//   axios.get(`${this.character.episode[1]}`)
-//     .then(response => this.info = response);
-// }
- 
+computed: {
+    sliceEpisodes: function () {
+      return this.character.episode.slice(0, 5).map(item => item.slice(-2).replace('/', ''))
+    }
+  }
 }
 </script>
 
@@ -40,7 +44,7 @@ export default {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 100%;
-    height: 400px;
+    height: 600px;
 }
 .card__title{
   width: 100%;
@@ -53,5 +57,18 @@ export default {
 
 .card__container {
     padding: 10px;
+}
+.card__subtitle{
+  margin: 10px 0;
+}
+.card__wrapper{
+  display: flex;
+}
+.card__link{
+  display: block;
+  font-size: 25px;
+  font-weight: 700;
+  margin-right: 15px;
+  color: blue;
 }
 </style>

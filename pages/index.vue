@@ -35,7 +35,7 @@ export default {
   },
   name: 'Main',
   methods: {
-    ...mapActions('characters', [
+    ...mapActions('main', [
       'fetchData'
     ]),
     changeCurrentPage (number) {
@@ -47,7 +47,7 @@ export default {
     this.fetchData(this.currentPage)
   },
   computed: {
-    ...mapGetters('characters', [
+    ...mapGetters('main', [
       'getData'
     ]),
     
@@ -84,7 +84,7 @@ ul {
   padding: 0;
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 

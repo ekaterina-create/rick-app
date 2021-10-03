@@ -18,7 +18,7 @@ export const state = () => ({
          let hero = response.data
          
          commit('SET_HERO', hero)
-         
+        
              })
    }
  }

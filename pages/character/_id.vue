@@ -1,39 +1,51 @@
 <template>
 <div class="container hero__container">
    <nuxt-link to='/' class='hero__link'>
-   Назад
+       Назад
    </nuxt-link>
-   <h1 class="title">{{getHero.name}}</h1>
-   <p class="hero__text">{{getHero.location.name}}</p>
-   <p class="hero__text">{{getHero.species}}</p>
-  <img class="hero__img" :src="getHero.image" alt="">
+   <div v-if="loading">Loading...</div>
+   <div v-else>
+      <h1 class="title">
+        {{hero.name}}
+        </h1>
+      <p class="hero__text">
+        {{hero.species}}
+        </p>
+      <p class="hero__text"
+      v-if="hero.location !== undefined">
+        {{hero.location.name}}
+        </p>
+      <img 
+      class="hero__img" 
+      :src="hero.image" 
+      alt="">
+  </div>
 </div>
-   
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: 'Hero',
+  name: 'Character',
   methods: {
-    ...mapActions('hero', [
+    ...mapActions('character', [
       'fetchHero'
     ]),
     },
   mounted () {
-    this.fetchHero(this.$route.params.id)
+    this.fetchHero(this.$route.params.id).then(this.loading = false)
   },
-  computed: {
-    ...mapGetters('hero', [
-      'getHero'
-    ]),
-    
-  },
-  
+  computed:mapGetters({
+    hero:'character/getHero'
+}),
+  data () {
+    return {
+      loading: true
+    }
+  }
 }
-  
-
+ 
 </script>
 
 <style>
