@@ -65,7 +65,7 @@ export default {
     this.fetchData(this.currentPage)
     .then(
       this.pages = this.getData.info.pages,
-       setTimeout(() => this.loading = false, 1000)
+       setTimeout(() => this.loading = false, 300)
     )},
   computed: {
     ...mapGetters("main", ["getData"]),

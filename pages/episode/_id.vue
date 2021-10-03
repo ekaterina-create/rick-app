@@ -27,7 +27,7 @@ export default {
   async mounted () {
     this.fetchEpisode(this.$route.params.id)
     .then(
-        setTimeout(() => this.loading = false, 1000),
+        setTimeout(() => this.loading = false, 300),
             
     )    
     },
