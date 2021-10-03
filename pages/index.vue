@@ -21,9 +21,7 @@
           :hero="hero"
         />
       </div>
-      
-      <template v-if="getData.info !== undefined">
-      <div class="pagination">
+      <div class="pagination" v-if="getData.info !== undefined">
         <button
           @click="changeCurrentPage(n)"
           :class="{ active: currentPage === n }"
@@ -33,8 +31,7 @@
           {{ n }}
         </button>
       </div> 
-      </template>
-    </div>
+     </div>
   </section>
 </template>
 
