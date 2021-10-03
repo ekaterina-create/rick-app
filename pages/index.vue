@@ -21,11 +21,11 @@
           :hero="hero"
         />
       </div>
-      <div class="pagination" v-if="getData.info !== undefined">
+      <div class="pagination" v-if="pages !== undefined">
         <button
           @click="changeCurrentPage(n)"
           :class="{ active: currentPage === n }"
-          v-for="n in getData.info.pages"
+          v-for="n in pages"
           :key="`pagination-item__${n}`"
         >
           {{ n }}
@@ -61,7 +61,8 @@ export default {
     },
   },
   async mounted() {
-    this.fetchData(this.currentPage);
+    this.fetchData(this.currentPage)
+    .then(this.pages = this.getData.info.pages);
   },
   computed: {
     ...mapGetters("main", ["getData"]),
@@ -80,6 +81,7 @@ export default {
       currentPage: 1,
       selected: "Выберите статус",
       search: "",
+      pages: ''
     };
   },
 };
