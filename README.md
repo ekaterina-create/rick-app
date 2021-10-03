@@ -1,4 +1,7 @@
 # rick-app
+https://rick-app-vzo5j7d6z-ekaterina-create.vercel.app/
+
+
 
 > test-project
 
