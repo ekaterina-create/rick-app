@@ -1,10 +1,6 @@
 <template>
   <section class="container">
-    <div class="loader" 
-    v-if="loading">
-    Loading...
-    </div>
-    <div v-else>
+     <div>
       <h1 class="title">Персонажи мультфильма</h1>
       <select name="" id="" class="select" v-model="selected">
         <option disable value="Выберите статус">Выберите статус</option>
@@ -59,16 +55,14 @@ export default {
       } else {
         return items;
       }
-    }
+    },
+    
   },
-  mounted() {
+  async mounted() {
     this.fetchData(this.currentPage)
-    .then(
-      this.pages = this.getData.info.pages,
-      this.loading = false
-    )},
+  },
   computed: {
-    ...mapGetters("main", ["getData"]),
+    ...mapGetters("main", ["getData","getInfo"]),
     filterByName: function () {
       if (this.search !== "") {
         return this.getData.results.filter(
@@ -81,11 +75,10 @@ export default {
   },
   data() {
     return {
-      loading: true,
       currentPage: 1,
       selected: "Выберите статус",
       search: "",
-      pages: ''
+      pages: 34
     };
   },
 };
@@ -95,7 +88,7 @@ export default {
 .container {
   position: relative;
   display: flex;
-  width: 80%;
+  max-width: 1300px;
   min-height: 70vh;
   margin: 0 auto;
 }
@@ -142,7 +135,7 @@ button {
   padding: 0;
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 310px);
   gap: 20px;
 }
 

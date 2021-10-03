@@ -21,9 +21,7 @@ export const actions = {
     
     await this.$axios.get(apiUrl).then(response => {
 
-      let data = response.data
-
-      commit('SET_DATA', data)
+        commit('SET_DATA', response.data)
 
     })
   }
@@ -32,5 +30,9 @@ export const actions = {
 export const getters = {
   getData(state) {
     return state.data
+  },
+  getInfo(state) {
+    return state.data.info
   }
+
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="character.image" alt="Avatar" style="width: 100%" />
+    <img class="card__img" :src="character.image" alt="Avatar"/>
     <div class="card__container">
       <nuxt-link 
       class="card__title"
@@ -48,11 +48,17 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 100%;
-  height: 500px;
+  height: 420px;
+}
+.card__img{
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
 }
 .card__title {
   width: 100%;
-  font-size: 30px;
+  font-size: 18px;
   color: #333;
   font-weight: 700;
   margin-bottom: 10px;
@@ -67,13 +73,14 @@ export default {
 }
 .card__subtitle {
   margin: 10px 0;
+  font-size: 15px;
 }
 .card__wrapper {
   display: flex;
 }
 .card__link {
   display: block;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
   margin-right: 15px;
   color: blue;
