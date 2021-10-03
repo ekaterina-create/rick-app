@@ -61,11 +61,11 @@ export default {
       }
     }
   },
-  async mounted() {
+  mounted() {
     this.fetchData(this.currentPage)
     .then(
       this.pages = this.getData.info.pages,
-       setTimeout(() => this.loading = false, 300)
+      this.loading = false
     )},
   computed: {
     ...mapGetters("main", ["getData"]),
