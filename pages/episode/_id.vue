@@ -3,7 +3,7 @@
    <nuxt-link to='/' class='episode__link'>
        Назад
    </nuxt-link>
-   <div v-if="loading" class="episode__loader">Loading...</div>
+   <div v-if="loading" class="loader">Loading...</div>
    <div v-else>
       <h1 class="title">
         {{episode.name}}
@@ -68,7 +68,7 @@ font-size: 40px;
    height: 600px;
    object-fit: contain;
 }
-.episode__loader{
+.loader{
 position: absolute;
 height: 100%;
 width: 100%;

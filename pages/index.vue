@@ -1,6 +1,10 @@
 <template>
   <section class="container">
-    <div>
+    <div class="loader" 
+    v-if="loading">
+    Loading...
+    </div>
+    <div v-else>
       <h1 class="title">Персонажи мультфильма</h1>
       <select name="" id="" class="select" v-model="selected">
         <option disable value="Выберите статус">Выберите статус</option>
@@ -11,15 +15,7 @@
       <form action="">
         <input type="text" v-model="search" placeholder="Поиск......" />
       </form>
-
-      <div class="list"> 
-        <card
-          v-for="hero in filterByStatus(filterByName)"
-          :key="hero.id"
-          :hero="hero"
-        />
-      </div>
-      <div class="pagination">
+        <div class="pagination">
         <button
           @click="changeCurrentPage(n)"
           :class="{ active: currentPage === n }"
@@ -29,7 +25,14 @@
           {{ n }}
         </button>
       </div> 
-     </div>
+      <div class="list"> 
+        <card
+          v-for="hero in filterByStatus(filterByName)"
+          :key="hero.id"
+          :hero="hero"
+        />
+      </div>
+       </div>
   </section>
 </template>
 
@@ -56,12 +59,14 @@ export default {
       } else {
         return items;
       }
-    },
+    }
   },
   async mounted() {
     this.fetchData(this.currentPage)
-    .then(this.pages = this.getData.info.pages);
-  },
+    .then(
+      this.pages = this.getData.info.pages,
+       setTimeout(() => this.loading = false, 1000)
+    )},
   computed: {
     ...mapGetters("main", ["getData"]),
     filterByName: function () {
@@ -76,6 +81,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       currentPage: 1,
       selected: "Выберите статус",
       search: "",
@@ -87,9 +93,10 @@ export default {
 
 <style>
 .container {
+  position: relative;
   min-height: 90vh;
   display: flex;
-  max-width: 1300px;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -135,7 +142,7 @@ button {
   padding: 0;
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
 
@@ -149,7 +156,7 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 10px;
+  width: 15px;
   border: none;
   color: black;
   padding: 8px 16px;
@@ -164,6 +171,18 @@ button {
 
 .pagination button:hover:not(.active) {
   background-color: #ddd;
+}
+.loader{
+position: absolute;
+height: 100%;
+width: 100%;
+top: 0;
+left: 0;
+bottom: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 100px;
 }
 </style>
 
