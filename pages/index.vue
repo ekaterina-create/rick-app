@@ -2,14 +2,12 @@
   <section class="container">
     <div>
       <h1 class="title">Персонажи мультфильма</h1>
-
       <select name="" id="" class="select" v-model="selected">
         <option disable value="Выберите статус">Выберите статус</option>
         <option value="alive">alive</option>
         <option value="dead">dead</option>
         <option value="unknown">unknown</option>
       </select>
-
       <form action="">
         <input type="text" v-model="search" placeholder="Поиск......" />
       </form>
@@ -21,7 +19,7 @@
           :hero="hero"
         />
       </div>
-      <div class="pagination" v-if="pages !== undefined">
+      <div class="pagination">
         <button
           @click="changeCurrentPage(n)"
           :class="{ active: currentPage === n }"

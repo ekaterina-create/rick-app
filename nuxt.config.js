@@ -22,7 +22,7 @@ module.exports = {
   */
   modules: ['@nuxtjs/axios'],
   plugins: [
-    { src: '~plugins/vuex-persist.js', ssr: false }
+    '~/plugins/vuex-persist.client',
   ],
   components: true,
   
