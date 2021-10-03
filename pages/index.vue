@@ -96,6 +96,7 @@ export default {
   position: relative;
   display: flex;
   width: 80%;
+  min-height: 70vh;
   margin: 0 auto;
 }
 
