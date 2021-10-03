@@ -1,5 +1,5 @@
 # rick-app
-https://rick-app-r3lxy0ybf-ekaterina-create.vercel.app/
+https://rick-app-eight.vercel.app/
 
 
 
