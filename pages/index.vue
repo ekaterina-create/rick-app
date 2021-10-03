@@ -1,70 +1,96 @@
 <template>
   <section class="container">
-      <div>
-        <h1 class="title">
-       Персонажи мультфильма
-      </h1>
-      <ul>
-       
-      <card v-for="hero in getData.results"
-         :key=hero.id
-         :hero="hero"/> 
-      </ul>
-     <div class="pagination" v-if="getData.info !== undefined">
-          <button
+    <div>
+      <h1 class="title">Персонажи мультфильма</h1>
+
+      <select name="" id="" class="select" v-model="selected">
+        <option disable value="Выберите статус">Выберите статус</option>
+        <option value="alive">alive</option>
+        <option value="dead">dead</option>
+        <option value="unknown">unknown</option>
+      </select>
+
+      <form action="">
+        <input type="text" v-model="search" placeholder="Поиск......" />
+      </form>
+
+      <div class="list"> 
+        <card
+          v-for="hero in filterByStatus(filterByName)"
+          :key="hero.id"
+          :hero="hero"
+        />
+      </div>
+      
+      <template v-if="getData.info !== undefined">
+      <div class="pagination">
+        <button
           @click="changeCurrentPage(n)"
-          :class="{'active' : currentPage === n}" 
+          :class="{ active: currentPage === n }"
           v-for="n in getData.info.pages"
-          :key="`pagination-item__${n}`">
+          :key="`pagination-item__${n}`"
+        >
           {{ n }}
         </button>
-  
-        </div> 
-      </div>
-          
+      </div> 
+      </template>
+    </div>
   </section>
 </template>
 
 <script>
-import Card from '@/components/MainCard'
-import { mapGetters, mapActions } from 'vuex'
+import Card from "@/components/MainCard";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
-    Card
+    Card,
   },
-  name: 'Main',
+  name: "Main",
   methods: {
-    ...mapActions('main', [
-      'fetchData'
-    ]),
-    changeCurrentPage (number) {
-      this.currentPage = number
-      this.fetchData(this.currentPage)
-   }
+    ...mapActions("main", ["fetchData"]),
+    changeCurrentPage(number) {
+      this.currentPage = number;
+      this.fetchData(this.currentPage);
+    },
+    filterByStatus(items) {
+      if (this.selected !== "Выберите статус") {
+        return items.filter(
+          (item) => item.status.toLowerCase() === this.selected
+        );
+      } else {
+        return items;
+      }
+    },
   },
-  async mounted () {
-    this.fetchData(this.currentPage)
+  async mounted() {
+    this.fetchData(this.currentPage);
   },
   computed: {
-    ...mapGetters('main', [
-      'getData'
-    ]),
-    
+    ...mapGetters("main", ["getData"]),
+    filterByName: function () {
+      if (this.search !== "") {
+        return this.getData.results.filter(
+          (item) => item.name.toLowerCase().indexOf(this.search) !== -1
+        );
+      } else {
+        return this.getData.results;
+      }
+    },
   },
   data() {
-        return {
-            currentPage: 1
-        };
-    },
-}
-  
-
+    return {
+      currentPage: 1,
+      selected: "Выберите статус",
+      search: "",
+    };
+  },
+};
 </script>
 
 <style>
 .container {
-  min-height: 80vh;
+  min-height: 90vh;
   display: flex;
   max-width: 1300px;
   margin: 0 auto;
@@ -72,15 +98,43 @@ export default {
 
 .title {
   text-align: center;
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 100;
   font-size: 50px;
   color: #35495e;
   margin-bottom: 20px;
 }
+.select {
+  display: inline-block;
+  border: 1px solid #e5e5e5;
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-right: 50px;
+  border-radius: 5px;
+}
 
-ul {
+form {
+  display: inline-block;
+  width: 700px;
+}
+input {
+  padding: 10px;
+  width: 75%;
+  height: 100%;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+}
+button {
+  border-radius: 5px;
+  font-size: 18px;
+  color: #333;
+  border: none;
+  padding: 7px 20px;
+}
+.list {
   padding: 0;
   list-style-type: none;
   display: grid;
@@ -89,7 +143,7 @@ ul {
 }
 
 .pagination {
-  margin-top: 20px;
+  margin-top: 40px;
   padding-bottom: 20px;
   display: inline-block;
 }
@@ -107,10 +161,12 @@ ul {
 }
 
 .pagination button.active {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
-.pagination button:hover:not(.active) {background-color: #ddd;}
+.pagination button:hover:not(.active) {
+  background-color: #ddd;
+}
 </style>
 

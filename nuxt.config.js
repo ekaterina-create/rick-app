@@ -21,7 +21,9 @@ module.exports = {
   ** Build configuration
   */
   modules: ['@nuxtjs/axios'],
-
+  plugins: [
+    { src: '~plugins/vuex-persist.js', ssr: false }
+  ],
   components: true,
   
   build: {
